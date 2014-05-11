@@ -90,7 +90,7 @@ hook.Add("PlayerInitialSpawn", "Spawn", function(ply)
 		end)
 	DATABASE:Query(string.format("SELECT * FROM `user_settings`"), function(query)
 			local data = query:getData()
-			ply.RunSpeed = data[1]["runspeed"]
-			ply.WalkSpeed = data[1]["walkspeed"]
+			ply:SetRunSpeed(data[1]["runspeed"])
+			ply:SetWalkSpeed(data[1]["walkspeed"])
 		end)
 end)
