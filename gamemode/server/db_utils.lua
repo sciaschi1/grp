@@ -41,9 +41,8 @@ timer.Create("GetCash", 1,0, function()
 end)
 
 timer.Create("Payday", 20,0, function()
-	print("Working")
 	for k,v in pairs( player.GetAll() ) do
-		
+		GRolePlay:Payday(v)
 	end
 end)
 
