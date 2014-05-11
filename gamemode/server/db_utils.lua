@@ -52,6 +52,20 @@ net.Receive("ChangeName", function(length, ply)
 	ply:ChatPrint("Name Changed!")
 end)
 
+hook.Add("PlayerSpawn", "CheckSpawn", function(ply)
+
+	if((ply.Job == "Commoner")) then
+		ply:SetTeam(1)
+		DATABASE:Query("UPDATE `user` SET payday = '100' WHERE game_name ='"..ply.NickName.."';")
+	elseif ((ply.Job == "Police")) then
+		ply:SetTeam(2)
+		DATABASE:Query("UPDATE `user` SET payday = '500' WHERE game_name ='"..ply.NickName.."';")
+	elseif ((ply.Job == "Mayor")) then
+		ply:SetTeam(3)
+		DATABASE:Query("UPDATE `user` SET payday = '1000' WHERE game_name ='"..ply.NickName.."';")
+	end
+
+end)
 
 hook.Add("PlayerInitialSpawn", "Spawn", function(ply)
 	ply.NickName = ply:Nick()
