@@ -48,6 +48,7 @@ end)
 net.Receive("ChangeName", function(length, ply)
 	local newname = net.ReadString()
 	DATABASE:Query("UPDATE `user` SET game_name = '"..newname.."' WHERE game_name ='"..ply.NickName.."';")
+	ply:ChatPrint("Name Changed!")
 end)
 
 
