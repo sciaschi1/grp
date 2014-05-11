@@ -68,7 +68,10 @@ hook.Add("PlayerSpawn", "CheckSpawn", function(ply)
 end)
 
 hook.Add("PlayerInitialSpawn", "Spawn", function(ply)
+	ply:SetTeam(1)
 	ply.NickName = ply:Nick()
+	DATABASE:Query("UPDATE `user` SET payday = '100' WHERE game_name ='"..ply.NickName.."';")
+	DATABASE:Query("UPDATE `user` SET job = 'Commoner' WHERE game_name ='"..ply.NickName.."';")
 	DATABASE:Query(string.format("SELECT * FROM `user` WHERE steam_id = '"..ply:SteamID().."'"), function(query)
 			local data = query:getData()
 			if data[1] then
@@ -76,6 +79,8 @@ hook.Add("PlayerInitialSpawn", "Spawn", function(ply)
 				ply.Cash = data[1]["Cash"]
 				ply.Payday = data[1]["payday"]
 				ply.Job = data[1]["job"]
+				
+				
 				net.Start("ChatText")
 					net.WriteString(ply.NickName)
 				net.Send(ply)
