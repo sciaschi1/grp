@@ -34,10 +34,6 @@ function GRolePlay:Payday(ply)
 	end
 end
 
-function ChangeJob(ply)
-	
-end
-
 timer.Create("GetCash", 1,0, function()
 	for k,v in pairs( player.GetAll() ) do
 		GRolePlay:GetCashandNick(v)
