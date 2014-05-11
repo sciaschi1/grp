@@ -1,0 +1,25 @@
+//AddCSLuaFiles (Clientside)
+AddCSLuaFile("shared.lua")
+//
+
+//Include Files (Serverside)
+include("shared.lua")
+include("server/_MySQL_.lua")
+include("server/db_utils.lua")
+include("server/ChatAPI.lua")
+
+util.AddNetworkString( "ChatText" )
+util.AddNetworkString( "ChangeName" )
+util.AddNetworkString( "GetClient" )
+
+
+RegisterChatCommand("!changename", function(ply, args)
+		local pname = args[1];
+
+		for _, v in pairs( player.GetAll() ) do
+			if( string.find(v:Nick(), pname) ) then
+				v:ConCommand("ChangeName");
+			end
+		end
+end)
+

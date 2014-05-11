@@ -1,0 +1,12 @@
+"groleplay"
+{
+	"base"		"base"
+	"title"		"grp"
+	"maps"		"^rp_"
+	"menusystem"	"1"
+
+	"settings"
+	{
+		// TODO: put some settings here
+	}
+}
