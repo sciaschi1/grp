@@ -4,7 +4,7 @@ util.AddNetworkString( "GetClient" )
 
 GRolePlay = {}
 function GRolePlay:Setup(ply)
-	DATABASE:Query("INSERT INTO `user` (id,steam_name,steam_id,game_name,Cash) VALUES (NULL, '"..ply:Name().."', '"..ply:SteamID().."', '"..ply.NickName.."', 0);", function(ply)
+	DATABASE:Query("INSERT INTO `user` (id,steam_name,steam_id,game_name,Cash,payday,job) VALUES (NULL, '"..ply:Name().."', '"..ply:SteamID().."', '"..ply.NickName.."', 0, 100, 'Commoner');", function(ply)
 		ply.NickName = ply:Nick()
 	end)
 end
@@ -15,6 +15,8 @@ function GRolePlay:GetCashandNick(ply)
 			if data[1] then
 				ply.NickName = data[1]["game_name"]
 				ply.Cash = data[1]["Cash"]
+				ply.Payday = data[1]["payday"]
+				ply.Job = data[1]["job"]
 				net.Start("ChatText")
 					net.WriteString(ply.NickName)
 				net.Send(ply)
@@ -28,8 +30,12 @@ end
 
 function GRolePlay:Payday(ply)
 	for _,ply in pairs( player.GetAll() ) do
-		DATABASE:Query("UPDATE `user` SET Cash = '".. (ply.Cash + GRolePlay:GetPayday(ply)) .."' WHERE game_name ='"..ply.NickName.."';")
+		DATABASE:Query("UPDATE `user` SET Cash = '".. (ply.Cash + ply.Payday) .."' WHERE game_name ='"..ply.NickName.."';")
 	end
+end
+
+function ChangeJob(ply)
+	
 end
 
 timer.Create("GetCash", 1,0, function()
@@ -41,7 +47,7 @@ end)
 timer.Create("Payday", 20,0, function()
 	print("Working")
 	for k,v in pairs( player.GetAll() ) do
-		GRolePlay:Payday(v)
+		
 	end
 end)
 
@@ -59,6 +65,8 @@ hook.Add("PlayerInitialSpawn", "Spawn", function(ply)
 			if data[1] then
 				ply.NickName = data[1]["game_name"]
 				ply.Cash = data[1]["Cash"]
+				ply.Payday = data[1]["payday"]
+				ply.Job = data[1]["job"]
 				net.Start("ChatText")
 					net.WriteString(ply.NickName)
 				net.Send(ply)
@@ -68,8 +76,6 @@ hook.Add("PlayerInitialSpawn", "Spawn", function(ply)
 		end)
 	DATABASE:Query(string.format("SELECT * FROM `user_settings`"), function(query)
 			local data = query:getData()
-			
-			ply.Payday = data[1]["payday"]
 			ply.RunSpeed = data[1]["runspeed"]
 			ply.WalkSpeed = data[1]["walkspeed"]
 		end)
