@@ -30,7 +30,7 @@ end
 
 function GRolePlay:Payday(ply)
 	for _,ply in pairs( player.GetAll() ) do
-		DATABASE:Query("UPDATE `user` SET Cash = '".. (SQLStr(ply.Cash) + SQLStr(ply.Payday)) .."' WHERE game_name ='"..SQLStr(ply.NickName).."';")
+		DATABASE:Query("UPDATE `user` SET Cash = '".. (ply.Cash + ply.Payday) .."' WHERE game_name ='"..SQLStr(ply.NickName).."';")
 	end
 end
 
@@ -40,9 +40,9 @@ timer.Create("GetCash", 1,0, function()
 	end
 end)
 
-timer.Create("Payday", 20,0, function()
+timer.Create("Payday", 4,0, function()
 	for k,v in pairs( player.GetAll() ) do
-		GRolePlay:Payday(v)
+		print(GRolePlay:GetPayday(v))
 	end
 end)
 
@@ -79,8 +79,6 @@ hook.Add("PlayerInitialSpawn", "Spawn", function(ply)
 				ply.Cash = data[1]["Cash"]
 				ply.Payday = data[1]["payday"]
 				ply.Job = data[1]["job"]
-				
-				
 				net.Start("ChatText")
 					net.WriteString(SQLStr(ply.NickName))
 				net.Send(ply)
