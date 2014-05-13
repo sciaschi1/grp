@@ -9,6 +9,7 @@ function DATABASE:Query(command, callback)
 	local query = DATABASE.Object:query(command)
 	query.onSuccess = callback
 	query.onError = function()
+		print(command)
 		if DATABASE.Object:status() ~= mysqloo.DATABASE_CONNECTED then
 			DATABASE.Object:connect()
 			DATABASE.Object:wait()
