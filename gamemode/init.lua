@@ -6,6 +6,7 @@ AddCSLuaFile("shared.lua")
 include("shared.lua")
 include("server/_MySQL_.lua")
 include("server/db_utils.lua")
+include("server/setup.lua")
 include("server/ChatAPI.lua")
 
 util.AddNetworkString( "ChatText" )
