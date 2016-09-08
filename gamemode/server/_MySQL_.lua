@@ -34,7 +34,9 @@ hook.Add("Initialize", "ConnectDatabase", function()
 	end
 	GRolePlay.DB.Object.onConnectionFailed = function()
 		print("Connection could not be established!")
+		GRolePlay.DB.Object:connect()
 	end
 	GRolePlay.DB.Object:connect()
 
 end)
+
