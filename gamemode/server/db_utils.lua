@@ -1,4 +1,3 @@
-
 if SERVER then
 	hook.Add("Initialize", "Create GRolePlay Database", function()
 		print("This is doing stuff")
@@ -44,7 +43,7 @@ if SERVER then
 
 	function GRolePlay.Gamemode:Payday(ply)
 		GRolePlay.Gamemode:FindPlayerInDB(ply)
-		
+		PrintTable(GRolePlay.Jobs)
 		GRolePlay.DB:Query("UPDATE `grp_player` SET money = money + ".. SQLStr(GRolePlay.Player.Payday) .." WHERE UID ="..SQLStr(ply:UniqueID())..";")
 	end
 
@@ -78,7 +77,6 @@ if SERVER then
 	hook.Add("PlayerInitialSpawn", "Spawn", function(ply)
 		ply:SetTeam(1)
 		ply.NickName = ply:Nick()
-
 		GRolePlay.Gamemode:GetInfoPly(ply)
 	end)
 end

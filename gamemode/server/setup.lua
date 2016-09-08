@@ -5,5 +5,6 @@ if !GRolePlay then
 	GRolePlay.DB = {}
 	GRolePlay.Config = {}
 	GRolePlay.Jobs = {}
+	GRolePlay.Functions = {}
 	GRolePlay.Player = {}
 end

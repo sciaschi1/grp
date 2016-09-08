@@ -14,7 +14,3 @@ function GM:OnPlayerChat( ply, strText)
 	chat.AddText(team.GetColor(ply:Team()), NickName, Color( 255, 255, 255 ), ": ", strText )
 	return true
 end
-
-team.SetUp (1, "Commoner", Color (255, 0, 0, 255))
-team.SetUp (2, "Police", Color (0, 255, 0, 255))
-team.SetUp (3, "Mayor", Color (0, 0, 255, 255))
