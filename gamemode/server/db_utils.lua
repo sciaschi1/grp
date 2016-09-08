@@ -3,12 +3,8 @@ util.AddNetworkString( "ChangeName" )
 util.AddNetworkString( "GetClient" )
 
 function GRolePlay.DB.CreateDatabase()
-	
-end
-
-function GRolePlay:Setup(ply)
-	GRolePlay.DB:Query("INSERT INTO `user` (id,steam_name,steam_id,game_name,Cash,payday,job) VALUES (NULL, "..SQLStr(ply:Name())..", "..SQLStr(ply:SteamID())..", "..SQLStr(ply.NickName)..", 0, 100, 'Commoner');", function(ply)
-	end)
+	GRolePlay.DB:Query("CREATE TABLE IF NOT EXISTS player_info (Name VARCHAR(50), UID NOT NULL int)")
+	GRolePlay.DB:Query("CREATE TABLE IF NOT EXISTS grp_player  (UID NOT NULL bigint(20), grp_name varchar(50), salary int, money int)")
 end
 
 function GRolePlay:GetInfoPly(ply)
@@ -22,6 +18,9 @@ function GRolePlay:GetInfoPly(ply)
 			net.Start("ChatText")
 				net.WriteString(ply.NickName)
 			net.Send(ply)
+		else
+			GRolePlay.DB:Query("INSERT INTO `user` (id,steam_name,steam_id,game_name,Cash,payday,job) VALUES (NULL, "..SQLStr(ply:Name())..", "..SQLStr(ply:SteamID())..", "..SQLStr(ply.NickName)..", 0, 100, 'Commoner');", function(ply)
+			end)
 		end
 	end)
 end

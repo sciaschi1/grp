@@ -1,39 +1,50 @@
-require("mysqloo")
+require( "mysqloo" )
 
-DATABASE = {}
-DATABASE.Object = nil
+local queue = {} 
+local GRolePlay.DB = mysqloo.connect( "185.38.149.155", "technofo_sean", "K1ll3r12", "technofo_groleplay", 3306 )
+ 
+function GRolePlay.DB:onConnected()
+	print( "[GRolePlay] Connection to database succeeded!" )
+	for k, v in pairs( queue ) do
 
-function DATABASE:Query(command, callback)
+		query( v[ 1 ], v[ 2 ] )
 
-	if !DATABASE.Object then return end
-	local query = DATABASE.Object:query(command)
-	query.onSuccess = callback
-	query.onError = function()
-		print(command)
-		if DATABASE.Object:status() ~= mysqloo.DATABASE_CONNECTED then
-			DATABASE.Object:connect()
-			DATABASE.Object:wait()
-			if DATABASE.Object:status() ~= mysqloo.DATABASE_CONNECTED then
-				ErrorNoHalt("Re-connection to database server failed.")
-				return
-			else
-				query:start()
-			end
-		end
 	end
-	query:start()
-	
+	queue = {}
+
 end
+ 
+function GRolePlay.DB:onConnectionFailed( err )
+ 
+    print( "[GRolePlay] Connection to database failed!" )
+    print( "Error:", err )
+ 
+end
+ 
+GRolePlay.DB:connect()
 
-hook.Add("Initialize", "ConnectDatabase", function()
+function query( sql, callback )
 
-	DATABASE.Object = mysqloo.connect("localhost", "root", "killer", "groleplay")
-	DATABASE.Object.onConnected = function()
-		print("Connected to database.")
+	local q = GRolePlay.DB:query( sql )
+	function q:onSuccess( data )
+	
+		callback( data )
+
 	end
-	DATABASE.Object.onConnectionFailed = function()
-		print("Connection could not be established!")
-	end
-	DATABASE.Object:connect()
 
-end)
+	function q:onError( err )
+
+		if GRolePlay.DB:status() == mysqloo.DATABASE_NOT_CONNECTED then
+			print( "[GRolePlay] MySQL Server has gone away! Trying to reconnect" )
+			table.insert( queue, { sql, callback } )
+			GRolePlay.DB:connect()
+			return
+		end
+
+		print( "Query Errored, error:", err, " sql: ", sql )
+
+	end
+
+	q:start()
+
+end
