@@ -4,6 +4,8 @@ GM.Email = "sciaschi@gmail.com"
 GM.Website = "gworlds.net"
 GM.Version = "1"
 
+
+
 local NickName
 
 net.Receive("ChatText", function()

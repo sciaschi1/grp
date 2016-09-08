@@ -1,4 +1,12 @@
 if SERVER then
+
+	net.Receive("GetJobsServer", function()
+		net.Start("GetJobsClient")
+			PrintTable(GRolePlay.Jobs)
+			net.WriteTable(GRolePlay.Jobs)
+		net.Broadcast()
+	end)
+	
 	hook.Add("Initialize", "Create GRolePlay Database", function()
 		print("This is doing stuff")
 		GRolePlay.DB:Query("CREATE TABLE player_info (Name VARCHAR(50), UID BIGINT(22) NOT NULL")
@@ -43,7 +51,7 @@ if SERVER then
 
 	function GRolePlay.Gamemode:Payday(ply)
 		GRolePlay.Gamemode:FindPlayerInDB(ply)
-		PrintTable(GRolePlay.Jobs)
+		//PrintTable(GRolePlay.Jobs)
 		GRolePlay.DB:Query("UPDATE `grp_player` SET money = money + ".. SQLStr(GRolePlay.Player.Payday) .." WHERE UID ="..SQLStr(ply:UniqueID())..";")
 	end
 

@@ -1,11 +1,16 @@
+//AddCSLuaFiles (Clientside)
 AddCSLuaFile("shared.lua")
-include("init.lua")
+AddCSLuaFile("client/cl_jobs.lua")
+//
 
+include("init.lua")
 timer.Create("GetClient", 1, 0, function()
 	net.Start("GetClient")
 		net.WriteEntity(LocalPlayer())
 	net.SendToServer()
 end)
+
+
 
 function ChangeMyName(ply)
 	local mainframe = vgui.Create("DFrame")
@@ -36,3 +41,38 @@ function ChangeMyName(ply)
 	end
 end
 concommand.Add("ChangeName",ChangeMyName)
+
+function JobMenu()
+	local DermaPanel = vgui.Create( "DFrame" )
+		  DermaPanel:SetPos( 100, 100 )
+		  DermaPanel:SetSize( 300, 200 )
+		  DermaPanel:SetTitle( "My new Derma frame" )
+		  DermaPanel:SetDraggable( true )
+		  DermaPanel:MakePopup()
+		  
+	net.Start("GetJobsServer")
+		net.WriteString("Send")
+	net.SendToServer()
+	
+	net.Receive("GetJobsClient", function()
+		print("did stuff")
+		local Jobs = net.ReadTable()
+		local grid = vgui.Create( "DGrid", DermaPanel )
+		  grid:SetPos( 10, 30 )
+		  grid:SetCols( 5 )
+		  grid:SetColWide( 36 )
+	
+		for i = 0, #Jobs - 1 do
+			print(Jobs[i + 1]['name'])
+			local but = vgui.Create( "DButton" )
+			but:SetText( Jobs[i + 1]['name'])
+			but:SetSize( 30, 20 )
+			grid:AddItem( but )
+		end
+	end)
+	
+	
+		  
+	
+end
+concommand.Add("OpenJobMenu", JobMenu)
