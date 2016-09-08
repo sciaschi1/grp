@@ -1,50 +1,40 @@
+include( "setup.lua" )
 require( "mysqloo" )
 
-local queue = {} 
-local GRolePlay.DB = mysqloo.connect( "185.38.149.155", "technofo_sean", "K1ll3r12", "technofo_groleplay", 3306 )
- 
-function GRolePlay.DB:onConnected()
-	print( "[GRolePlay] Connection to database succeeded!" )
-	for k, v in pairs( queue ) do
+GRolePlay.DB = {}
+GRolePlay.DB.Object = nil
 
-		query( v[ 1 ], v[ 2 ] )
+function GRolePlay.DB:Query(command, callback)
 
-	end
-	queue = {}
-
-end
- 
-function GRolePlay.DB:onConnectionFailed( err )
- 
-    print( "[GRolePlay] Connection to database failed!" )
-    print( "Error:", err )
- 
-end
- 
-GRolePlay.DB:connect()
-
-function query( sql, callback )
-
-	local q = GRolePlay.DB:query( sql )
-	function q:onSuccess( data )
-	
-		callback( data )
-
-	end
-
-	function q:onError( err )
-
-		if GRolePlay.DB:status() == mysqloo.DATABASE_NOT_CONNECTED then
-			print( "[GRolePlay] MySQL Server has gone away! Trying to reconnect" )
-			table.insert( queue, { sql, callback } )
-			GRolePlay.DB:connect()
-			return
+	if !GRolePlay.DB.Object then return end
+	local query = GRolePlay.DB.Object:query(command)
+	query.onSuccess = callback
+	query.onError = function()
+		print(command)
+		if GRolePlay.DB.Object:status() ~= mysqloo.DATABASE_CONNECTED then
+			GRolePlay.DB.Object:connect()
+			GRolePlay.DB.Object:wait()
+			if GRolePlay.DB.Object:status() ~= mysqloo.DATABASE_CONNECTED then
+				ErrorNoHalt("Re-connection to database server failed.")
+				return
+			else
+				query:start()
+			end
 		end
-
-		print( "Query Errored, error:", err, " sql: ", sql )
-
 	end
-
-	q:start()
-
+	query:start()
+	
 end
+
+hook.Add("Initialize", "ConnectDatabase", function()
+
+	GRolePlay.DB.Object = mysqloo.connect("185.38.149.155", "technofo_sean", "K1ll3r12", "technofo_groleplay")
+	GRolePlay.DB.Object.onConnected = function()
+		print("Connected to database.")
+	end
+	GRolePlay.DB.Object.onConnectionFailed = function()
+		print("Connection could not be established!")
+	end
+	GRolePlay.DB.Object:connect()
+
+end)
