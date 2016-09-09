@@ -1,7 +1,7 @@
 "groleplay"
 {
-	"base"		"base"
-	"title"		"grp"
+	"base"		"sandbox"
+	"title"		"GRolePlay"
 	"maps"		"^rp_"
 	"menusystem"	"1"
 

@@ -3,11 +3,13 @@ GM.Author = "(DJ)Led Zeppelin"
 GM.Email = "sciaschi@gmail.com"
 GM.Website = "gworlds.net"
 GM.Version = "1"
+DeriveGamemode("sandbox")
 
 if CLIENT then
 	//AddCSLuaFiles (Clientside)
 	AddCSLuaFile("shared.lua")
 	include("client/cl_notifications.lua")
+	include("client/cl_jobs.lua")
 	//
 end
 

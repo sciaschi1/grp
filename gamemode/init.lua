@@ -1,3 +1,5 @@
+DeriveGamemode("sandbox")
+
 //Include Files (Serverside)
 AddCSLuaFile("shared.lua")
 include("shared.lua")
@@ -17,3 +19,27 @@ util.AddNetworkString( "GetJobsServer" )
 util.AddNetworkString( "GetJobsClient" )
 
 
+local weapons = {
+"weapon_physcannon",
+"weapon_physgun",
+"gmod_tool",
+"gmod_camera",
+}
+
+hook.Add("PlayerLoadout","RestrictWeapons",function(ply)
+	for _,v in ipairs(weapons) do ply:Give(v) end
+	return true
+end)
+
+/*
+function GM:EntityTakeDamage( target, d )
+	local attacker, inflictor, damage, type = d:GetAttacker(), d:GetInflictor(), d:GetDamage(), d:GetDamageType()
+	local propdmg = string.find(string.lower(tostring(d:GetAttacker())), "prop_")
+	
+	if (target:IsPlayer() and propdmg >= 1) then 
+		return true 
+	elseif(	propdmg < 0 ) then
+		return false
+	end
+end
+*/
