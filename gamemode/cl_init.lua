@@ -62,11 +62,19 @@ function JobMenu()
 		  grid:SetCols( 5 )
 		  grid:SetColWide( 36 )
 	
-		for i = 0, #Jobs - 1 do
-			print(Jobs[i + 1]['name'])
+		for i = 1, #Jobs do
+			print(Jobs[i]['name'])
 			local but = vgui.Create( "DButton" )
-			but:SetText( Jobs[i + 1]['name'])
+			but:SetText( Jobs[i]['name'])
 			but:SetSize( 30, 20 )
+			but.DoClick = function(ply)
+				net.Start("ChangeJob")
+					net.WriteEntity(LocalPlayer())
+					print(i .. " is the index. SO DONT TELL ME IT DOESNT EXIST")
+					net.WriteInt(i, 3)
+				net.SendToServer()
+				
+			end
 			grid:AddItem( but )
 		end
 	end)

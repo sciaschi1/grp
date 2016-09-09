@@ -1,2 +1,2 @@
-GRolePlay.Functions:CreateJob("Bloop", 25, "blp", "jegsg")
-GRolePlay.Functions:CreateJob("Herp", 25, "hrp", "ewgwg")
+GRolePlay.Functions:CreateJob("Bloop", 30, "blp", "jegsg")
+GRolePlay.Functions:CreateJob("Herp", 40, "hrp", "ewgwg")

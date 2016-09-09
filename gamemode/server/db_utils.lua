@@ -26,7 +26,7 @@ if SERVER then
 				GRolePlay.Player.Payday = data[1]["salary"]
 				PrintTable(GRolePlay.Player)
 				net.Start("ChatText")
-					net.WriteString(ply.NickName)
+					net.WriteString(GRolePlay.Player.NickName)
 				net.Send(ply)
 			else
 				print("[GRolePlay] New user! Creating player information")
@@ -43,17 +43,28 @@ if SERVER then
 				GRolePlay.Player.NickName = data[1]["grp_name"]
 				GRolePlay.Player.Money = data[1]["money"]
 				GRolePlay.Player.Payday = data[1]["salary"]
-				PrintTable(GRolePlay.Player)
-				PrintTable( player.GetAll() )
 			end
 		end)
 	end
 
 	function GRolePlay.Gamemode:Payday(ply)
 		GRolePlay.Gamemode:FindPlayerInDB(ply)
-		//PrintTable(GRolePlay.Jobs)
+		
 		GRolePlay.DB:Query("UPDATE `grp_player` SET money = money + ".. SQLStr(GRolePlay.Player.Payday) .." WHERE UID ="..SQLStr(ply:UniqueID())..";")
 	end
+	
+	net.Receive("ChangeJob", function()
+		print("Got job change from client")
+		local ply = net.ReadEntity()
+		local teamIndex = net.ReadInt(3)
+		
+		ply:SetTeam(teamIndex)
+		print("SHOW ME THE JOBS")
+		PrintTable(GRolePlay.Jobs[ply:Team()])
+		print(GRolePlay.Jobs[ply:Team()]['salary'])
+		GRolePlay.DB:Query("UPDATE `grp_player` SET salary = ".. SQLStr(GRolePlay.Jobs[ply:Team()]['salary']) .." WHERE UID ="..SQLStr(ply:UniqueID())..";")
+	end)
+
 
 	timer.Create("Payday", 10,0, function()
 		for k,v in pairs( player.GetAll()) do
@@ -67,24 +78,9 @@ if SERVER then
 		ply:ChatPrint("Name Changed!")
 	end)
 
-	hook.Add("PlayerSpawn", "CheckSpawn", function(ply)
-		/*
-		if((ply.Job == "Commoner")) then
-			ply:SetTeam(1)
-			GRolePlay.DB:Query("UPDATE `user` SET payday = '100' WHERE game_name = "..SQLStr(ply.NickName)..";")
-		elseif ((ply.Job == "Police")) then
-			ply:SetTeam(2)
-			GRolePlay.DB:Query("UPDATE `user` SET payday = '500' WHERE game_name = "..SQLStr(ply.NickName)..";")
-		elseif ((ply.Job == "Mayor")) then
-			ply:SetTeam(3)
-			GRolePlay.DB:Query("UPDATE `user` SET payday = '1000' WHERE game_name = "..SQLStr(ply.NickName)..";")
-		end
-		*/
-	end)
-
 	hook.Add("PlayerInitialSpawn", "Spawn", function(ply)
 		ply:SetTeam(1)
-		ply.NickName = ply:Nick()
+		GRolePlay.Player.NickName = ply:Nick()
 		GRolePlay.Gamemode:GetInfoPly(ply)
 	end)
 end

@@ -9,6 +9,7 @@ include("server/jobs.lua")
 
 util.AddNetworkString( "ChatText" )
 util.AddNetworkString( "ChangeName" )
+util.AddNetworkString( "ChangeJob" )
 util.AddNetworkString( "GetClient" )
 util.AddNetworkString( "GetJobsServer" )
 util.AddNetworkString( "GetJobsClient" )
