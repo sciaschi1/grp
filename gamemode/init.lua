@@ -1,5 +1,7 @@
 //Include Files (Serverside)
+AddCSLuaFile("shared.lua")
 include("shared.lua")
+AddCSLuaFile("client/cl_notifications.lua")
 include("server/_MySQL_.lua")
 include("server/db_utils.lua")
 include("server/setup.lua")

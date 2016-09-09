@@ -1,8 +1,4 @@
-//AddCSLuaFiles (Clientside)
-AddCSLuaFile("shared.lua")
-AddCSLuaFile("client/cl_jobs.lua")
-//
-
+AddCSLuaFile("client/cl_notifications.lua")
 include("init.lua")
 timer.Create("GetClient", 1, 0, function()
 	net.Start("GetClient")
@@ -112,6 +108,8 @@ function JobMenu()
 				effectdata:SetOrigin(vPoint)
 				effectdata:SetScale(1)
 				util.Effect("ManHackSparks", effectdata)
+				EmitSound( Sound( "garrysmod/balloon_pop_cute.wav" ), LocalPlayer():GetPos(), 1, CHAN_AUTO, 1, 75, 0, 100 )
+				notification.AddLegacy("You changed your job to " .. Jobs[i]['name'], NOTIFY_GENERIC, 5)
 				DermaPanel:Close()
 			end
 			
@@ -123,3 +121,4 @@ function JobMenu()
 	
 end
 concommand.Add("OpenJobMenu", JobMenu)
+
