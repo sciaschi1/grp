@@ -20,7 +20,7 @@ if SERVER then
 			if data[1] then
 				print("[GRolePlay] Found Player, Setting local info")
 				GRolePlay.DB:Query("UPDATE `grp_player` SET payday = '25' WHERE UID = "..SQLStr(ply:UniqueID())..";")
-		
+				
 				GRolePlay.Player.NickName = data[1]["grp_name"]
 				GRolePlay.Player.Money = data[1]["money"]
 				GRolePlay.Player.Payday = data[1]["salary"]
@@ -59,9 +59,7 @@ if SERVER then
 		local teamIndex = net.ReadInt(3)
 		
 		ply:SetTeam(teamIndex)
-		print("SHOW ME THE JOBS")
-		PrintTable(GRolePlay.Jobs[ply:Team()])
-		print(GRolePlay.Jobs[ply:Team()]['salary'])
+		ply:SetModel( GRolePlay.Jobs[ply:Team()]['model'] )
 		GRolePlay.DB:Query("UPDATE `grp_player` SET salary = ".. SQLStr(GRolePlay.Jobs[ply:Team()]['salary']) .." WHERE UID ="..SQLStr(ply:UniqueID())..";")
 	end)
 

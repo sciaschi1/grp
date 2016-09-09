@@ -1,2 +1,4 @@
-GRolePlay.Functions:CreateJob("Bloop", 30, "blp", "jegsg")
-GRolePlay.Functions:CreateJob("Herp", 40, "hrp", "ewgwg")
+//GRolePlay.Functions:CreateJob(name, salary, model, command)
+
+GRolePlay.Functions:CreateJob("Officer", 30, "models/player/barney.mdl", "jegsg")
+GRolePlay.Functions:CreateJob("Citizen", 40, "models/player/odessa.mdl", "ewgwg")
