@@ -28,9 +28,17 @@ function JobMenu()
 		draw.RoundedBox( 0, 0, 0, w, h, Color( 0, 128, 255 ) ) 
 	end
 	
-	local JobsDescLabel = vgui.Create("DLabel", JobsTab)
-	JobsDescLabel:SetPos(JobsTab:GetWide() - 150, JobsTab:GetTall() - 120)
-	JobsDescLabel:SizeToContents()
+	local JobsDescLabel = vgui.Create("DTextEntry", JobsTab)
+	JobsDescLabel:SetSize(250, 250)
+	JobsDescLabel:SetPos(JobsTab:GetWide() - 250, JobsTab:GetTall() - 120)
+	JobsDescLabel:SetMultiline(true)
+	JobsDescLabel:AllowInput(false)
+	JobsDescLabel:SetFont("GRolePlayButtonFont")
+	JobsDescLabel:SetTextColor(Color(255, 255, 255))
+	JobsDescLabel.Paint = function(self, w, h)
+		draw.RoundedBox( 0, 0, 0, w, h, Color(41, 128, 185) )
+		self:DrawTextEntryText(Color(255, 255, 255), Color(30, 130, 255), Color(255, 255, 255))
+	end
 	
 	
 	//Instantiate the jobs button
