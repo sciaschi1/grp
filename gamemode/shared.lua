@@ -1,7 +1,7 @@
-GM.Name = "GWorlds | GRolePlay"
-GM.Author = "(DJ)Led Zeppelin"
+GM.Name = "TechnoFox | MethRP"
+GM.Author = "Mister Fox"
 GM.Email = "sciaschi@gmail.com"
-GM.Website = "gworlds.net"
+GM.Website = "technofoxservers.com"
 GM.Version = "1"
 DeriveGamemode("sandbox")
 

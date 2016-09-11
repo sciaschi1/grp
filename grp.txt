@@ -1,7 +1,7 @@
 "groleplay"
 {
 	"base"		"sandbox"
-	"title"		"GRolePlay"
+	"title"		"MethRP"
 	"maps"		"^rp_"
 	"menusystem"	"1"
 
