@@ -1,18 +1,13 @@
-GM.Name = "TechnoFox | MethRP"
-GM.Author = "Mister Fox"
-GM.Email = "sciaschi@gmail.com"
-GM.Website = "technofoxservers.com"
-GM.Version = "1"
 DeriveGamemode("sandbox")
 
 //Include Clientside Files
-if CLIENT then
-	AddCSLuaFile("cl_init.lua")
-	AddCSLuaFile("client/cl_jobs.lua")
-	AddCSLuaFile("client/cl_notifications.lua")
-end
+AddCSLuaFile("client/cl_jobs.lua")
+AddCSLuaFile("client/cl_notifications.lua")
+AddCSLuaFile( "cl_init.lua" )
+AddCSLuaFile( "shared.lua" )
 
 //Include Files (Serverside)
+include( "shared.lua" )
 include("server/_MySQL_.lua")
 include("server/db_utils.lua")
 include("server/setup.lua")

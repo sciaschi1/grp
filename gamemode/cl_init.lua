@@ -1,14 +1,11 @@
+//Includes
+include( "shared.lua" )
+
 surface.CreateFont( "GRolePlayButtonFont", {
 	font = "Roboto", -- Use the font-name which is shown to you by your operating system Font Viewer, not the file name
 	size = 20,
 	weight = 500
 } )
-
-DeriveGamemode("sandbox")
-
-//Includes
-AddCSLuaFile("client/cl_notifications.lua")
-AddCSLuaFile("client/cl_jobs.lua")
 
 timer.Create("GetClient", 1, 0, function()
 	net.Start("GetClient")
