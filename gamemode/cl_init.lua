@@ -1,3 +1,9 @@
+surface.CreateFont( "GRolePlayButtonFont", {
+	font = "Roboto", -- Use the font-name which is shown to you by your operating system Font Viewer, not the file name
+	size = 20,
+	weight = 500
+} )
+
 DeriveGamemode("sandbox")
 
 //Includes
@@ -11,8 +17,6 @@ timer.Create("GetClient", 1, 0, function()
 	net.SendToServer()
 end)
 
-
-
 function ChangeMyName(ply)
 	local mainframe = vgui.Create("DFrame")
 	mainframe:SetSize(250,100)
@@ -20,7 +24,7 @@ function ChangeMyName(ply)
 	mainframe:Center()
 	mainframe:SetBackgroundBlur( true )
 	mainframe:MakePopup()
-	
+
 	local NameText = vgui.Create("DLabel", mainframe)
 	NameText:SetText("New Name: ")
 	NameText:SetPos(5,35)
@@ -42,6 +46,3 @@ function ChangeMyName(ply)
 	end
 end
 concommand.Add("ChangeName",ChangeMyName)
-
-
-

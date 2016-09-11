@@ -3,7 +3,7 @@ include( "setup.lua" )
 GRolePlay.Functions = {}
 
 local jobCount = 0
-function GRolePlay.Functions:CreateJob(name, salary, model, command)
+function GRolePlay.Functions:CreateJob(name, salary, model, description ,command)
 	local jobs = {name = name, salary = salary, model = model, command = command}
 	
 	jobs.name = name
@@ -12,6 +12,8 @@ function GRolePlay.Functions:CreateJob(name, salary, model, command)
     jobs.team = jobCount
 
     jobs.salary = math.floor(jobs.salary)
+	
+	jobs.description = description
 	
 	jobs.model = model
 	jobs.command = command
