@@ -9,7 +9,6 @@ DeriveGamemode("sandbox")
 //Includes
 AddCSLuaFile("client/cl_notifications.lua")
 AddCSLuaFile("client/cl_jobs.lua")
-include("init.lua")
 
 timer.Create("GetClient", 1, 0, function()
 	net.Start("GetClient")
@@ -46,3 +45,4 @@ function ChangeMyName(ply)
 	end
 end
 concommand.Add("ChangeName",ChangeMyName)
+
