@@ -1,5 +1,8 @@
 //Includes
+include("client/cl_jobs.lua")
+include("client/cl_notifications.lua")
 include( "shared.lua" )
+print("included client files")
 
 surface.CreateFont( "GRolePlayButtonFont", {
 	font = "Roboto", -- Use the font-name which is shown to you by your operating system Font Viewer, not the file name

@@ -16,13 +16,6 @@ if SERVER then
 	include("server/utils.lua")
 	include("server/jobs.lua")
 	print("included server files")
-else
-	
-	include("client/cl_jobs.lua")
-	include("client/cl_notifications.lua")
-	include( "cl_init.lua" )
-	include( "shared.lua" )
-	print("included client files")
 end 
 util.AddNetworkString( "ChatText" )
 util.AddNetworkString( "ChangeName" )

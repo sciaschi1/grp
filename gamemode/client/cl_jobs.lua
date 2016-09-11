@@ -29,8 +29,8 @@ function JobMenu()
 	end
 	
 	local JobsDescLabel = vgui.Create("DTextEntry", JobsTab)
-	JobsDescLabel:SetSize(250, 250)
-	JobsDescLabel:SetPos(JobsTab:GetWide() - 250, JobsTab:GetTall() - 120)
+	JobsDescLabel:SetSize(450, 250)
+	JobsDescLabel:SetPos(JobsTab:GetWide() - 450, JobsTab:GetTall() - 120)
 	JobsDescLabel:SetMultiline(true)
 	JobsDescLabel:AllowInput(false)
 	JobsDescLabel:SetFont("GRolePlayButtonFont")
