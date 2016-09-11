@@ -25,7 +25,7 @@ function JobMenu()
 	JobsTab:SetSize( 800, DermaPanel:GetTall() ) -- Set the size of the panel
 	JobsTab:MoveTo( 200, 0, 0.2, 0, 1)
 	JobsTab.Paint = function( self, w, h ) 
-		draw.RoundedBox( 0, 0, 0, w, h, Color( 0, 128, 255 ) ) 
+		draw.RoundedBox( 0, 0, 0, w, h, Color(189, 195, 199) ) 
 	end
 	
 	local JobsDescLabel = vgui.Create("DTextEntry", JobsTab)
@@ -50,7 +50,7 @@ function JobMenu()
 			JobsTab:MoveTo( 200, 0, 0.2, 0, 1)
 		end
 		JobsTabButton.Paint = function( self, w, h ) 
-			draw.RoundedBox( 0, 0, 0, w, h, Color(41, 128, 185) )
+			draw.RoundedBox( 0, 0, 0, w, h, Color(52, 152, 219) )
 			draw.DrawText( "Jobs", "GRolePlayButtonFont", w / 2, (h / 2) - 10, Color( 255, 255, 255, 255 ), TEXT_ALIGN_CENTER )
 		end
 	
@@ -67,6 +67,9 @@ function JobMenu()
 		local IconsPanel = vgui.Create( "DScrollPanel", JobsTab )
 		IconsPanel:SetPos( 0, 0 )
 		IconsPanel:SetSize( 350, DermaPanel:GetTall() )
+		IconsPanel.Paint = function(self, w, h)
+			draw.RoundedBox( 0, 0, 0, w, h, Color(0, 0, 0, 150) )
+		end
 		
 		//Paint the Scroll Panel scrollbar
 		local sbar = IconsPanel:GetVBar()
