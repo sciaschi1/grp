@@ -23,7 +23,7 @@ function JobMenu()
 	local JobsTab = vgui.Create( "DPanel", DermaPanel )
 	JobsTab:SetPos( -800, 0 ) -- Set the position of the panel
 	JobsTab:SetSize( 800, DermaPanel:GetTall() ) -- Set the size of the panel
-	JobsTab:MoveTo( 200, 0, 0.2, 0, 1)
+	JobsTab:MoveTo( 200, 0, 0.3, 0, 1)
 	JobsTab.Paint = function( self, w, h ) 
 		draw.RoundedBox( 0, 0, 0, w, h, Color(189, 195, 199) ) 
 	end

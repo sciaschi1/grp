@@ -1,20 +1,29 @@
 DeriveGamemode("sandbox")
 
-//Include Clientside Files
-AddCSLuaFile("client/cl_jobs.lua")
-AddCSLuaFile("client/cl_notifications.lua")
-AddCSLuaFile( "cl_init.lua" )
-AddCSLuaFile( "shared.lua" )
+if SERVER then
+	//Include Clientside Files
+	AddCSLuaFile("client/cl_jobs.lua")
+	AddCSLuaFile("client/cl_notifications.lua")
+	AddCSLuaFile( "cl_init.lua" )
+	AddCSLuaFile( "shared.lua" )
 
-//Include Files (Serverside)
-include( "shared.lua" )
-include("server/_MySQL_.lua")
-include("server/db_utils.lua")
-include("server/setup.lua")
-include("server/ChatAPI.lua")
-include("server/utils.lua")
-include("server/jobs.lua")
-
+	//Include Files (Serverside)
+	include( "shared.lua" )
+	include("server/_MySQL_.lua")
+	include("server/db_utils.lua")
+	include("server/setup.lua")
+	include("server/ChatAPI.lua")
+	include("server/utils.lua")
+	include("server/jobs.lua")
+	print("included server files")
+else
+	
+	include("client/cl_jobs.lua")
+	include("client/cl_notifications.lua")
+	include( "cl_init.lua" )
+	include( "shared.lua" )
+	print("included client files")
+end 
 util.AddNetworkString( "ChatText" )
 util.AddNetworkString( "ChangeName" )
 util.AddNetworkString( "ChangeJob" )

@@ -8,6 +8,8 @@ surface.CreateFont( "GRolePlayButtonFont", {
 } )
 
 timer.Create("GetClient", 1, 0, function()
+	//print("HEWOIJEWOIWEG")
+	
 	net.Start("GetClient")
 		net.WriteEntity(LocalPlayer())
 	net.SendToServer()
