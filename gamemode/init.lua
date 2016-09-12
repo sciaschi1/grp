@@ -37,6 +37,12 @@ hook.Add("PlayerLoadout","RestrictWeapons",function(ply)
 	return true
 end)
 
+function GM:ShowSpare2(ply)
+	ply:ConCommand( "OpenJobMenu" )
+end
+
+
+
 /*
 function GM:EntityTakeDamage( target, d )
 	local attacker, inflictor, damage, type = d:GetAttacker(), d:GetInflictor(), d:GetDamage(), d:GetDamageType()

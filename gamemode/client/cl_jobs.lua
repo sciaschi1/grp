@@ -95,12 +95,11 @@ function JobMenu()
 	
 		//Get all Jobs and make icons based on the job
 		for i = 1, #Jobs do
-		
-			//Set up panel for job model
+			
+				//Set up panel for job model
 			local Panel = vgui.Create( "DPanel" )
 			Panel:SetSize( 100, 100 )
-
-			// Player Icon for Job
+				// Player Icon for Job
 			local icon = vgui.Create( "DModelPanel", Panel )
 			icon:SetSize( 100, 100 )
 			icon:SetModel( Jobs[i]['model'] ) -- you can only change colors on playermodels
@@ -116,7 +115,7 @@ function JobMenu()
 			icon:SetCamPos( eyepos-Vector( -15, 0, 0 ) )	-- Move cam in front of eyes
 
 			icon.Entity:SetEyeTarget( eyepos-Vector( -12, 0, 0 ) )
-			
+				
 			function icon:OnMousePressed( keyCode )
 				net.Start("ChangeJob")
 					net.WriteEntity(LocalPlayer())
@@ -134,16 +133,21 @@ function JobMenu()
 				DermaPanel:Close()
 			end
 			
+				
 			function icon:OnCursorEntered()
 				JobsDescLabel:SetText(Jobs[i]['description'])
 			end
-			
+				
 			function icon:OnCursorExited()
 				JobsDescLabel:SetText("")
 			end
+				
+			if(ply:Team() == i) then
+				Panel:Hide()
+			else
+				grid:AddItem( Panel )
+			end	
 			
-			
-			grid:AddItem( Panel )
 		end
 	end)
 end

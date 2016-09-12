@@ -20,6 +20,11 @@ function ENT:Use( activator, caller )
     return
 end
  
+ function ENT:PhysicsCollide(data, phys)
+	local curTime = CurTime(); 
+	print(data.HitEntity:GetClass() .. " and current time :".. curTime)
+ end
+ 
 function ENT:Think()
     -- We don't need to think, we are just a prop after all!
 end

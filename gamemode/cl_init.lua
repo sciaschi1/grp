@@ -10,6 +10,8 @@ surface.CreateFont( "GRolePlayButtonFont", {
 	weight = 500
 } )
 
+
+
 timer.Create("GetClient", 1, 0, function()
 	//print("HEWOIJEWOIWEG")
 	

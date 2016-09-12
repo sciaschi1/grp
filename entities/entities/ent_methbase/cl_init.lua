@@ -17,6 +17,7 @@ function ENT:Draw()
 			draw.SimpleText( "Ingredients Needed", "GRolePlayButtonFont", 15, 15, Color( 255, 255, 255, 255 ), TEXT_ALIGN_LEFT)
 			surface.SetDrawColor( 130, 0, 0, 255)
 			surface.DrawRect( 0, 35, 250, 5 )
+			
 		cam.End3D2D()
 	end
 	
