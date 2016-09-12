@@ -8,13 +8,15 @@ function ENT:Draw()
 		local Pos = self:GetPos()
 		local Ang = self:GetAngles()
 
-		Ang:RotateAroundAxis(Ang:Up(), 90)
 		Ang:RotateAroundAxis(Ang:Forward(), 90)
 		
-		cam.Start3D2D(Pos + Ang:Up() * 50 + Ang:Forward() * -15 + Ang:Right() * -40, Ang, 0.11)
+		cam.Start3D2D(Pos + Ang:Up() * 15+ Ang:Forward() * -20 + Ang:Right() * -25, Ang, 0.11)
 			draw.RoundedBox( 0, 0, 0, 400, 275, Color(20,20,20,255) )
 			surface.DrawOutlinedRect( 0, 0, 275, 275 )
 			surface.DrawOutlinedRect( 1, 1, 273, 273 )
+			draw.SimpleText( "Ingredients Needed", "GRolePlayButtonFont", 15, 15, Color( 255, 255, 255, 255 ), TEXT_ALIGN_LEFT)
+			surface.SetDrawColor( 130, 0, 0, 255)
+			surface.DrawRect( 0, 35, 250, 5 )
 		cam.End3D2D()
 	end
 	
