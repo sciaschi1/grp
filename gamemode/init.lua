@@ -3,6 +3,7 @@ DeriveGamemode("sandbox")
 if SERVER then
 	//Include Clientside Files
 	AddCSLuaFile("client/cl_jobs.lua")
+	AddCSLuaFile("client/cl_hud.lua")
 	AddCSLuaFile("client/cl_notifications.lua")
 	AddCSLuaFile( "cl_init.lua" )
 	AddCSLuaFile( "shared.lua" )

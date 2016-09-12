@@ -1,6 +1,7 @@
 //Includes
 include("client/cl_jobs.lua")
 include("client/cl_notifications.lua")
+include("client/cl_hud.lua")
 include( "shared.lua" )
 print("included client files")
 
@@ -9,7 +10,6 @@ surface.CreateFont( "GRolePlayButtonFont", {
 	size = 20,
 	weight = 500
 } )
-
 
 
 timer.Create("GetClient", 1, 0, function()
